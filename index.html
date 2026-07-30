@@ -1,18 +1,188 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
-	<meta charset="UTF-8">
-	<title> 蛋仔帝国国防部</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>哈夫克集团</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft Yahei", sans-serif;
+        }
+        body {
+            /* 星空背景容器 */
+            background: #040818;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        /* 星空粒子动画层 */
+        .star-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .star {
+            position: absolute;
+            background-color: #ffffff;
+            border-radius: 50%;
+            opacity: 0;
+            animation: twinkle 8s infinite ease-in-out;
+        }
+        /* 星星闪烁漂浮动画 */
+        @keyframes twinkle {
+            0% {
+                opacity: 0;
+                transform: translateY(0) scale(0.5);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(-30px) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-60px) scale(0.4);
+            }
+        }
+        /* 顶部导航栏 */
+        header {
+            width: 100%;
+            background: linear-gradient(90deg, #0a1436, #0c2052, #0a1436);
+            display: flex;
+            align-items: center;
+            padding: 14px 60px;
+            gap: 60px;
+            box-shadow: 0 2px 12px #00082280;
+        }
+        .nav-logo img {
+            height: 70px;
+            /* 此处替换你的logo图片链接 */
+            content: url(".png");
+        }
+        .nav-menu {
+            display: flex;
+            gap: 55px;
+            flex: 1;
+        }
+        .nav-menu a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 22px;
+            padding: 8px 4px;
+            position: relative;
+            transition: color 0.3s;
+        }
+        .nav-menu a:hover {
+            color: #66ccff;
+        }
+        .nav-menu a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 3px;
+            background: #44aaff;
+            transition: width 0.3s;
+        }
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+        /* 主体内容区域 */
+        main {
+            padding: 80px 30px;
+            text-align: center;
+        }
+        .page-title {
+            font-size: 64px;
+            color: #ffffff;
+            font-weight: bold;
+            margin-bottom: 60px;
+            letter-spacing: 6px;
+        }
+        /* 三张图片并排容器 */
+        .img-card-wrap {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .img-card {
+            width: 32%;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 0 25px #3388ff40;
+        }
+        .img-card img {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            /* 替换图片地址 */
+            content: url("pic1.jpg");
+            display: block;
+        }
+    </style>
 </head>
-<body style="background-color: #48CEF7;">
-	<a href="https://haavkplatformg.pages.dev">网页导览</a>  <a href="about.html">关于我们</a>    <a href="news.html">最新新闻</a>
-	
-	<h1>蛋仔帝国</h1>
-	<h2>蛋仔帝国国防部内部网站</h2>
-	<p>蛋仔帝国国防部部长经第二次蛋仔帝国人事代表大会选举决定为猴小美</p>
-	<img src="https://i.postimg.cc/3JWgK9vH/image.png" width="260" height="265"/>      <img src="https://i.postimg.cc/W3B4NDF6/image.png" width="280" height="265">
-	<p>----------猴小美(现任国防部部长) ------------------西班pig(第一任，前任国防部部长)-----------</p>                                                     	
-	
+<body>
+    <!-- 星空背景粒子自动生成 -->
+    <div class="star-bg" id="starBox"></div>
+
+    <!-- 顶部导航栏 -->
+    <header>
+        <div class="nav-logo">
+            <!-- Logo图片地址，替换为你的图标 -->
+            <img src="logo.png" alt="哈夫克集团logo">
+        </div>
+        <div class="nav-menu">
+            <!-- 同目录html跳转 -->
+            <a href="index.html">首页</a>
+            <a href="about.html">关于我们</a>
+            <a href="project.html">最新项目</a>
+            <a href="news.html">热点新闻</a>
+            <!-- 外链网站导览页面 -->
+            <a href="https://old-six-x.github.io/HAAVKplatformG/" target="_blank">网站导览</a>
+        </div>
+    </header>
+
+    <!-- 页面主体 -->
+    <main>
+        <h1 class="page-title">哈夫克集团</h1>
+        <!-- 三张并排圆角图片 -->
+        <div class="img-card-wrap">
+            <div class="img-card">
+                <img src="img1.png" alt="展示图1">
+            </div>
+            <div class="img-card">
+                <img src="img2.png" alt="展示图2">
+            </div>
+            <div class="img-card">
+                <img src="img3.png" alt="展示图3">
+            </div>
+        </div>
+    </main>
+
+    <!-- JS生成随机星星，实现闪烁漂浮星空 -->
+    <script>
+        const starBox = document.getElementById("starBox");
+        // 生成200颗随机星星
+        for(let i = 0; i < 200; i++){
+            const star = document.createElement("div");
+            star.className = "star";
+            // 随机大小、位置、动画延迟
+            let size = Math.random() * 3 + 1;
+            star.style.width = size + "px";
+            star.style.height = size + "px";
+            star.style.left = Math.random() * 100 + "%";
+            star.style.top = Math.random() * 100 + "%";
+            star.style.animationDelay = Math.random() * 8 + "s";
+            starBox.appendChild(star);
+        }
+    </script>
 </body>
 </html>
-
