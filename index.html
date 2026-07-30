@@ -12,7 +12,6 @@
             font-family: "Microsoft Yahei", sans-serif;
         }
         body {
-            /* 星空背景容器 */
             background: #040818;
             min-height: 100vh;
             overflow-x: hidden;
@@ -61,8 +60,6 @@
         }
         .nav-logo img {
             height: 70px;
-            /* 此处替换你的logo图片链接 */
-            content: url("a.png");
         }
         .nav-menu {
             display: flex;
@@ -105,16 +102,19 @@
             margin-bottom: 60px;
             letter-spacing: 6px;
         }
-        /* 三张图片并排容器 */
+        /* 三张图片并排容器 修复布局 */
         .img-card-wrap {
             display: flex;
             justify-content: center;
             gap: 32px;
             max-width: 1400px;
             margin: 0 auto;
+            /* 移动端自动换行 */
+            flex-wrap: wrap;
         }
         .img-card {
-            width: 32%;
+            width: calc((100% - 64px) / 3);
+            min-width: 280px;
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 0 25px #3388ff40;
@@ -123,9 +123,32 @@
             width: 100%;
             height: 260px;
             object-fit: cover;
-            /* 替换图片地址 */
-            content: url("chatu1.png");
             display: block;
+            /* 移除错误的 content:url() 写法 */
+        }
+        /* 手机适配 */
+        @media (max-width:992px) {
+            .img-card {
+                width: 45%;
+            }
+        }
+        @media (max-width:600px) {
+            .img-card {
+                width: 100%;
+            }
+            header {
+                flex-direction: column;
+                gap:20px;
+                padding:15px;
+            }
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content:center;
+                gap:20px;
+            }
+            .page-title {
+                font-size:40px;
+            }
         }
     </style>
 </head>
@@ -136,16 +159,13 @@
     <!-- 顶部导航栏 -->
     <header>
         <div class="nav-logo">
-            <!-- Logo图片地址，替换为你的图标 -->
             <img src="a.png" alt="哈夫克集团logo">
         </div>
         <div class="nav-menu">
-            <!-- 同目录html跳转 -->
             <a href="index.html">首页</a>
             <a href="about.html">关于我们</a>
             <a href="project.html">最新项目</a>
             <a href="news.html">热点新闻</a>
-            <!-- 外链网站导览页面 -->
             <a href="https://old-six-x.github.io/HAAVKplatformG/" target="_blank">网站导览</a>
         </div>
     </header>
@@ -167,14 +187,12 @@
         </div>
     </main>
 
-    <!-- JS生成随机星星，实现闪烁漂浮星空 -->
+    <!-- JS生成随机星星 -->
     <script>
         const starBox = document.getElementById("starBox");
-        // 生成200颗随机星星
         for(let i = 0; i < 200; i++){
             const star = document.createElement("div");
             star.className = "star";
-            // 随机大小、位置、动画延迟
             let size = Math.random() * 3 + 1;
             star.style.width = size + "px";
             star.style.height = size + "px";
